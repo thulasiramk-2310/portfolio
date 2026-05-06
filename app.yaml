@@ -1,0 +1,12 @@
+runtime: python39
+
+handlers:
+# Route the root path to index.html
+- url: /
+  static_files: index.html
+  upload: index.html
+
+# Route everything else to the file itself
+- url: /(.*)
+  static_files: \1
+  upload: (.*)

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Thulasiram K — Software Engineer. Backend systems, cloud-native applications, and AI-powered tools."/>
+<title>Thulasiram K — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#080809;--bg2:#0c0c0f;--card:#101014;--card2:#171720;
+  --border:#1c1c25;--border2:#28283a;
+  --text:#e2e2ef;--muted:#68687e;--muted2:#42425a;
+  --accent:#3b82f6;--accent2:#06b6d4;--accent3:#8b5cf6;
+  --green:#10b981;--amber:#f59e0b;--red:#ef4444;
+  --r:12px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.65;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes gridPulse{0%,100%{opacity:.03}50%{opacity:.065}}
+@keyframes cmdIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes gp{0%,100%{box-shadow:0 0 18px rgba(59,130,246,.1)}50%{box-shadow:0 0 34px rgba(59,130,246,.22)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes hamTop{from{}to{transform:translateY(6.5px) rotate(45deg)}}
+@keyframes hamBot{from{}to{transform:translateY(-6.5px) rotate(-45deg)}}
+
+.a1{animation:fadeUp .6s .05s both;}
+.a2{animation:fadeUp .6s .15s both;}
+.a3{animation:fadeUp .6s .27s both;}
+.a4{animation:fadeUp .6s .40s both;}
+.a5{animation:fadeUp .6s .55s both;}
+.a6{animation:fadeUp .6s .72s both;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;padding:0 1.5rem;background:rgba(8,8,9,.9);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--border);display:flex;align-items:center;}
+.nav-in{width:100%;max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:1rem;}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.03em;cursor:pointer;margin-right:auto;}
+.nav-logo em{color:var(--accent);font-style:normal;}
+.nav-links{display:flex;gap:.1rem;}
+.nav-links a{color:var(--muted);font-size:.79rem;font-weight:500;padding:.38rem .7rem;border-radius:6px;transition:.15s;}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--text);background:var(--card2);outline:none;}
+.nav-cmd{display:flex;align-items:center;gap:.42rem;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:.28rem .76rem;cursor:pointer;font-size:.75rem;color:var(--muted);transition:.15s;font-family:'DM Sans',sans-serif;}
+.nav-cmd:hover,.nav-cmd:focus-visible{color:var(--text);outline:none;}
+.nav-cmd kbd{background:var(--card2);border:1px solid var(--border2);border-radius:4px;padding:.06rem .35rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;}
+.ham{display:none;flex-direction:column;gap:5px;background:transparent;border:none;cursor:pointer;padding:.4rem;border-radius:7px;transition:.15s;}
+.ham:hover{background:var(--card2);}
+.ham span{display:block;width:20px;height:1.5px;background:var(--muted);border-radius:2px;transition:transform .22s ease, opacity .18s ease;}
+.mob-menu{position:fixed;top:56px;left:0;right:0;z-index:199;background:rgba(9,9,12,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.75rem 1.5rem 1.25rem;display:none;flex-direction:column;gap:.3rem;}
+.mob-menu.open{display:flex;}
+.mob-menu a{color:var(--muted);font-size:.9rem;font-weight:500;padding:.6rem .75rem;border-radius:8px;transition:.14s;}
+.mob-menu a:hover{color:var(--text);background:var(--card2);}
+@media(max-width:768px){.nav-links,.nav-cmd{display:none;}.ham{display:flex;}}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:300;pointer-events:none;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:5.5rem 1.5rem 3.5rem;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:52px 52px;animation:gridPulse 10s ease-in-out infinite;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);}
+.o1{width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,.07),transparent 70%);top:-12%;left:4%;}
+.o2{width:360px;height:360px;background:radial-gradient(circle,rgba(6,182,212,.05),transparent 70%);bottom:6%;right:4%;}
+.hero-in{max-width:1080px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+.htag{display:inline-flex;align-items:center;gap:.48rem;background:var(--card);border:1px solid var(--border2);border-radius:100px;padding:.3rem .88rem;font-size:.71rem;font-family:'JetBrains Mono',monospace;color:var(--accent2);margin-bottom:1.5rem;}
+.hdot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2.4s ease-in-out infinite;flex-shrink:0;}
+h1.hn{font-family:'Syne',sans-serif;font-size:clamp(2.75rem,6vw,4.8rem);font-weight:800;letter-spacing:-.045em;line-height:1.03;margin-bottom:.58rem;}
+h1.hn span{background:linear-gradient(130deg,var(--accent) 15%,var(--accent2) 85%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hrole{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--muted);margin-bottom:1.45rem;letter-spacing:.01em;}
+.hrole .s{color:var(--muted2);}
+.hhl{font-size:clamp(.98rem,1.85vw,1.28rem);font-weight:300;color:var(--text);max-width:555px;line-height:1.68;margin-bottom:.82rem;}
+.hsub{font-size:.875rem;color:var(--muted);max-width:500px;line-height:1.88;margin-bottom:1.9rem;}
+.hbtns{display:flex;gap:.58rem;flex-wrap:wrap;}
+.bp{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.58rem 1.28rem;font-size:.84rem;font-weight:600;cursor:pointer;transition:.16s;font-family:'DM Sans',sans-serif;}
+.bp:hover{background:#2563eb;transform:translateY(-1px);}
+.bp:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+.bg{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--text);border:1px solid var(--border2);border-radius:8px;padding:.58rem 1.28rem;font-size:.84rem;font-weight:500;cursor:pointer;transition:.16s;font-family:'DM Sans',sans-serif;}
+.bg:hover{background:var(--card2);transform:translateY(-1px);}
+.bg:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.hcode{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:1.3rem 1.55rem;font-family:'JetBrains Mono',monospace;font-size:.73rem;line-height:1.95;min-width:272px;max-width:306px;animation:float 7s ease-in-out infinite,gp 4s ease-in-out infinite;position:relative;flex-shrink:0;}
+.hcode::before{content:'';position:absolute;top:0;left:18px;right:18px;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.4),transparent);}
+.cbar{display:flex;gap:.38rem;margin-bottom:.88rem;}
+.cd{width:10px;height:10px;border-radius:50%;}
+.kw{color:#a78bfa;}.fn{color:var(--accent2);}.cm{color:var(--muted2);}.nm{color:var(--amber);}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr;}.hcode{display:none;}}
+@media(max-width:480px){#hero{padding:5rem 1.25rem 3rem;}}
+
+/* SECTIONS */
+section{padding:5rem 0;}
+.si{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+.stag{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.82rem;}
+h2.st{font-family:'Syne',sans-serif;font-size:clamp(1.65rem,2.8vw,2.25rem);font-weight:700;letter-spacing:-.03em;margin-bottom:.52rem;}
+.sline{width:34px;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:2.35rem;border-radius:2px;}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:1.35rem;}
+@media(max-width:660px){.ag{grid-template-columns:1fr;}}
+.acd{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.65rem;}
+.acd h3{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;margin-bottom:.75rem;}
+.acd p{font-size:.875rem;color:var(--muted);line-height:1.84;}
+.acd p+p{margin-top:.6rem;}
+.mtag{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--accent2);margin-top:.85rem;}
+.sts{display:flex;gap:.82rem;margin-top:1.4rem;flex-wrap:wrap;}
+.stat{background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:.68rem .88rem;text-align:center;flex:1;min-width:68px;}
+.sv{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;line-height:1;}
+.sl{font-size:.67rem;color:var(--muted);margin-top:.2rem;font-family:'JetBrains Mono',monospace;}
+
+/* EXPLORING */
+#exploring{background:var(--bg);}
+.exw{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.35rem;}
+.exch{display:inline-flex;align-items:center;gap:.55rem;background:var(--card);border:1px solid var(--border2);border-radius:100px;padding:.45rem 1.05rem;font-size:.79rem;color:var(--muted);transition:.17s;cursor:default;}
+.exch:hover{border-color:var(--accent);color:var(--text);background:rgba(59,130,246,.06);}
+.exd{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* PROJECTS */
+#projects{background:var(--bg2);}
+.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem;}
+@media(max-width:680px){.pg{grid-template-columns:1fr;}}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;transition:.2s;position:relative;overflow:hidden;}
+.pc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:.28s;}
+.pc:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 20px 44px rgba(0,0,0,.42);}
+.pc:hover::after{opacity:1;}
+.pdiag{background:var(--card2);border-bottom:1px solid var(--border);padding:1rem 1.4rem;border-radius:16px 16px 0 0;}
+.pdiag svg{width:100%;max-width:100%;}
+.pbody{padding:1.35rem;display:flex;flex-direction:column;gap:.82rem;flex:1;}
+.ph2{display:flex;justify-content:space-between;align-items:flex-start;}
+.pico{width:38px;height:38px;background:var(--card2);border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+.plinks{display:flex;gap:.4rem;}
+.plink{width:28px;height:28px;border:1px solid var(--border2);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:.16s;color:var(--muted);background:transparent;}
+.plink:hover{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.07);}
+.plink:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.pn{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:-.022em;}
+.pd{font-size:.845rem;color:var(--muted);line-height:1.72;margin-top:.3rem;}
+.pfs{display:flex;flex-direction:column;gap:.34rem;}
+.pf{display:flex;align-items:flex-start;gap:.44rem;font-size:.79rem;color:var(--muted2);line-height:1.52;}
+.pf::before{content:'→';color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.72rem;margin-top:.07rem;flex-shrink:0;}
+.bds{display:flex;flex-wrap:wrap;gap:.35rem;}
+.b{background:var(--card2);border:1px solid var(--border);border-radius:5px;padding:.17rem .56rem;font-size:.69rem;font-family:'JetBrains Mono',monospace;color:var(--muted);transition:.17s;cursor:default;}
+.b:hover{border-color:rgba(59,130,246,.35);color:var(--accent);}
+.ba{border-color:rgba(59,130,246,.22);color:var(--accent);background:rgba(59,130,246,.05);}
+.bc{border-color:rgba(6,182,212,.22);color:var(--accent2);background:rgba(6,182,212,.05);}
+.bpu{border-color:rgba(139,92,246,.22);color:var(--accent3);background:rgba(139,92,246,.05);}
+.bgn{border-color:rgba(16,185,129,.22);color:var(--green);background:rgba(16,185,129,.05);}
+.bam{border-color:rgba(245,158,11,.22);color:var(--amber);background:rgba(245,158,11,.05);}
+
+/* SKILLS */
+#skills{background:var(--bg);}
+.skgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.12rem;}
+.skc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.38rem;}
+.skt{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;margin-bottom:.88rem;display:flex;align-items:center;gap:.48rem;}
+.skd{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.skps{display:flex;flex-wrap:wrap;gap:.4rem;}
+.skp{background:var(--card2);border:1px solid var(--border);border-radius:100px;padding:.26rem .76rem;font-size:.74rem;font-family:'JetBrains Mono',monospace;color:var(--muted);transition:.16s;cursor:default;}
+.skp:hover{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.28);color:var(--text);}
+
+/* EXPERIENCE */
+#experience{background:var(--bg2);}
+.el{display:flex;flex-direction:column;gap:1.3rem;}
+.ec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;display:grid;grid-template-columns:10px 1fr;gap:1.15rem;transition:.18s;}
+.ec:hover{border-color:var(--border2);}
+.edot{width:10px;height:10px;border-radius:50%;margin-top:.42rem;flex-shrink:0;}
+.er{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.014em;}
+.eco{font-size:.78rem;color:var(--accent);font-family:'JetBrains Mono',monospace;margin:.2rem 0;}
+.edt{font-size:.72rem;color:var(--muted2);font-family:'JetBrains Mono',monospace;margin-bottom:.68rem;}
+.eps{display:flex;flex-direction:column;gap:.38rem;}
+.ep{font-size:.845rem;color:var(--muted);display:flex;gap:.46rem;line-height:1.62;}
+.ep::before{content:'▸';color:var(--accent2);flex-shrink:0;font-size:.68rem;margin-top:.22rem;}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--bg);}
+.achg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.12rem;}
+.ach{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:.2s;position:relative;overflow:hidden;}
+.ach:hover{border-color:var(--border2);transform:translateY(-2px);}
+.atag{position:absolute;top:.82rem;right:.82rem;border-radius:6px;padding:.12rem .46rem;font-size:.66rem;font-family:'JetBrains Mono',monospace;}
+.tos{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.22);color:var(--accent2);}
+.twin{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.22);color:var(--amber);}
+.ttop{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.22);color:var(--accent);}
+.tfin{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.22);color:var(--accent3);}
+.aic{font-size:1.48rem;margin-bottom:.68rem;}
+.at{font-family:'Syne',sans-serif;font-size:.91rem;font-weight:700;margin-bottom:.36rem;}
+.as{font-size:.8rem;color:var(--muted);line-height:1.66;}
+
+/* CONTACT */
+#contact{background:var(--bg2);}
+.cg{display:grid;grid-template-columns:1fr 1.1fr;gap:3rem;}
+@media(max-width:680px){.cg{grid-template-columns:1fr;}}
+.ci h3{font-family:'Syne',sans-serif;font-size:1.48rem;font-weight:700;letter-spacing:-.025em;margin-bottom:.68rem;line-height:1.25;}
+.ci p{font-size:.875rem;color:var(--muted);line-height:1.84;margin-bottom:1.6rem;}
+.cls{display:flex;flex-direction:column;gap:.62rem;}
+.cl{display:flex;align-items:center;gap:.7rem;color:var(--muted);font-size:.85rem;padding:.46rem;border-radius:9px;transition:.16s;}
+.cl:hover{color:var(--text);background:var(--card);}
+.cl:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.cli{width:34px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cf{display:flex;flex-direction:column;gap:.78rem;}
+.ff{display:flex;flex-direction:column;gap:.34rem;}
+.ff label{font-size:.74rem;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.ff input,.ff textarea{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:.7rem .92rem;font-size:.875rem;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:.18s;width:100%;}
+.ff input:focus,.ff textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.08);}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--muted2);}
+.fsub{display:flex;align-items:center;justify-content:center;gap:.46rem;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:.76rem 1.5rem;font-size:.875rem;font-weight:600;cursor:pointer;transition:.17s;font-family:'DM Sans',sans-serif;width:100%;}
+.fsub:hover:not(:disabled){background:#2563eb;}
+.fsub:disabled{opacity:.65;cursor:not-allowed;}
+.fsub:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+.fmsg{font-size:.8rem;font-family:'JetBrains Mono',monospace;padding:.58rem .88rem;border-radius:7px;display:none;}
+.fmsg.ok{background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.24);color:var(--green);display:block;}
+.fmsg.er{background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.24);color:var(--red);display:block;}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;}
+footer p{font-size:.75rem;color:var(--muted2);font-family:'JetBrains Mono',monospace;line-height:1.85;}
+
+/* CMD */
+.cmd-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding-top:10vh;backdrop-filter:blur(5px);}
+.cmd-box{width:536px;max-width:92vw;background:var(--card);border:1px solid var(--border2);border-radius:17px;overflow:hidden;animation:cmdIn .17s ease;box-shadow:0 48px 96px rgba(0,0,0,.65);}
+.cmd-top{display:flex;align-items:center;gap:.7rem;padding:.92rem 1.18rem;border-bottom:1px solid var(--border);}
+.cmd-top input{background:transparent;border:none;outline:none;font-size:.9rem;color:var(--text);flex:1;font-family:'DM Sans',sans-serif;}
+.cmd-top input::placeholder{color:var(--muted2);}
+.cmd-body{max-height:315px;overflow-y:auto;}
+.cmd-sec{padding:.4rem 1rem .16rem;font-size:.67rem;color:var(--muted2);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;}
+.cmd-it{display:flex;align-items:center;gap:.65rem;padding:.6rem 1rem;cursor:pointer;transition:.1s;color:var(--muted);}
+.cmd-it:hover,.cmd-it.on{background:var(--card2);color:var(--text);}
+.cmd-ico{width:27px;height:27px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;}
+.cmd-lbl{font-size:.83rem;font-weight:500;}
+.cmd-ft{padding:.48rem 1rem;border-top:1px solid var(--border);display:flex;gap:1.15rem;font-size:.67rem;color:var(--muted2);font-family:'JetBrains Mono',monospace;}
+</style>
+</head>
+<body>
+
+<div id="prog" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header>
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-in">
+    <a class="nav-logo" href="#hero" aria-label="Thulasiram K home">tk<em>.</em></a>
+    <div class="nav-links" role="menubar">
+      <a href="#about" role="menuitem">About</a>
+      <a href="#projects" role="menuitem">Projects</a>
+      <a href="#skills" role="menuitem">Skills</a>
+      <a href="#experience" role="menuitem">Experience</a>
+      <a href="#achievements" role="menuitem">Achievements</a>
+      <a href="#contact" role="menuitem">Contact</a>
+    </div>
+    <button class="nav-cmd" onclick="openCmd()" aria-label="Open command palette (Ctrl+K)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search <kbd>⌘K</kbd>
+    </button>
+    <button class="ham" id="ham" onclick="toggleMob()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobmenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mob-menu" id="mobmenu" aria-label="Mobile navigation">
+  <a href="#about"        onclick="closeMob()">About</a>
+  <a href="#projects"     onclick="closeMob()">Projects</a>
+  <a href="#skills"       onclick="closeMob()">Skills</a>
+  <a href="#experience"   onclick="closeMob()">Experience</a>
+  <a href="#achievements" onclick="closeMob()">Achievements</a>
+  <a href="#contact"      onclick="closeMob()">Contact</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="hero" aria-label="Introduction">
+  <div class="hgrid" aria-hidden="true"></div>
+  <div class="orb o1" aria-hidden="true"></div>
+  <div class="orb o2" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div>
+      <div class="htag a1" role="status"><span class="hdot" aria-hidden="true"></span>Open to software engineering internships</div>
+      <h1 class="hn a2">Thulasiram <span>K</span></h1>
+      <p class="hrole a3">Software Engineer <span class="s">·</span> Backend Systems <span class="s">·</span> Cloud &amp; AI Applications</p>
+      <p class="hhl a4">Building scalable software, intelligent applications, and modern cloud systems.</p>
+      <p class="hsub a5">Computer Science Engineering student focused on backend development, cloud-native applications, real-time systems, and AI-powered tooling.</p>
+      <div class="hbtns a6">
+        <a href="https://drive.google.com/drive/folders/your-resume-link" class="bp" target="_blank" rel="noopener" aria-label="Download resume">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </a>
+        <a href="https://github.com/thulasiramk-2310" class="bg" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/thulasiram-k" class="bg" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="hcode a5" aria-hidden="true">
+      <div class="cbar">
+        <div class="cd" style="background:#ef4444"></div>
+        <div class="cd" style="background:#f59e0b"></div>
+        <div class="cd" style="background:#10b981"></div>
+      </div>
+      <div><span class="cm"># multi-agent pipeline</span></div>
+      <div><span class="kw">async def</span> <span class="fn">run</span>(code: <span class="nm">str</span>):</div>
+      <div>&nbsp;&nbsp;rev = <span class="kw">await</span> <span class="fn">ReviewAgent</span>(code)</div>
+      <div>&nbsp;&nbsp;pat = <span class="kw">await</span> <span class="fn">PatchAgent</span>(rev)</div>
+      <div>&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">EvalAgent</span>(pat)</div>
+      <br>
+      <div><span class="cm">// concurrent streaming</span></div>
+      <div><span class="kw">func</span> <span class="fn">Stream</span>(ws <span class="nm">*WS</span>) {</div>
+      <div>&nbsp;&nbsp;<span class="kw">go</span> <span class="fn">collectCPU</span>(ws.ch)</div>
+      <div>&nbsp;&nbsp;<span class="kw">go</span> <span class="fn">collectMem</span>(ws.ch)</div>
+      <div>}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="si">
+    <div class="stag">// 01 — about</div>
+    <h2 class="st">Who I Am</h2>
+    <div class="sline"></div>
+    <div class="ag">
+      <div class="acd">
+        <h3>The Engineer</h3>
+        <p>I'm a Computer Science (AI &amp; ML) student at Chennai Institute of Technology, building systems at the intersection of backend engineering, cloud infrastructure, and applied AI. I care about clean architecture, reliability, and writing software that holds up under real conditions — not just in demos.</p>
+        <p>I'm drawn to problems that require both systems-level thinking and product sense: a Go backend managing concurrent WebSocket streams, a multi-agent LLM pipeline, or an ML-integrated IoT data system.</p>
+        <div class="sts">
+          <div class="stat"><div class="sv">6+</div><div class="sl">projects</div></div>
+          <div class="stat"><div class="sv">3</div><div class="sl">hackathon wins</div></div>
+          <div class="stat"><div class="sv">7.54</div><div class="sl">CGPA</div></div>
+        </div>
+      </div>
+      <div class="acd">
+        <h3>What Drives Me</h3>
+        <p>I got into engineering because I wanted to build things that actually work. I've competed in hackathons (and won a few), contributed upstream to an AWS open-source TLS library, and explored research applying AI to financial market prediction.</p>
+        <p>I'm genuinely curious about how large-scale systems are designed, how AI agents can be integrated into real developer workflows, and what it takes to ship software that scales. Not as a buzzword exercise — as working, useful products.</p>
+        <p>Actively seeking software engineering, backend, cloud, and AI engineering internships.</p>
+        <div class="mtag">B.E. CSE (AI &amp; ML) · CIT · 2024–2028</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRENTLY EXPLORING -->
+<section id="exploring" aria-labelledby="ex-heading">
+  <div class="si">
+    <div class="stag">// currently exploring</div>
+    <h2 class="st" id="ex-heading" style="font-size:clamp(1.3rem,2.1vw,1.7rem)">Things I'm Thinking About</h2>
+    <div class="sline"></div>
+    <div class="exw" role="list">
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--accent)" aria-hidden="true"></span>Distributed Systems</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--accent2)" aria-hidden="true"></span>AI Agents &amp; Tool Use</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--accent3)" aria-hidden="true"></span>Cloud Infrastructure Design</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--green)" aria-hidden="true"></span>Real-Time Application Architecture</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--amber)" aria-hidden="true"></span>System Design Patterns</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:#ec4899" aria-hidden="true"></span>Financial AI Systems</div>
+      <div class="exch" role="listitem"><span class="exd" style="background:var(--accent)" aria-hidden="true"></span>Open Source Contribution</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="si">
+    <div class="stag">// 02 — projects</div>
+    <h2 class="st">Featured Work</h2>
+    <div class="sline"></div>
+    <div class="pg">
+
+      <!-- TRX-AI -->
+      <article class="pc" aria-label="TRX-AI project">
+        <div class="pdiag" aria-hidden="true">
+          <svg viewBox="0 0 296 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="a1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="#42425a"/></marker>
+              <marker id="a2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="rgba(59,130,246,.5)"/></marker>
+              <marker id="a3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="rgba(6,182,212,.5)"/></marker>
+              <marker id="a4" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5z" fill="rgba(16,185,129,.5)"/></marker>
+            </defs>
+            <rect x="3" y="21" width="42" height="22" rx="4" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.32)" stroke-width="1"/>
+            <text x="24" y="32" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">code</text>
+            <rect x="62" y="13" width="52" height="38" rx="4" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.32)" stroke-width="1"/>
+            <text x="88" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Review</text>
+            <text x="88" y="41" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Agent</text>
+            <rect x="133" y="13" width="52" height="38" rx="4" fill="rgba(6,182,212,.06)" stroke="rgba(6,182,212,.32)" stroke-width="1"/>
+            <text x="159" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Patch</text>
+            <text x="159" y="41" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Agent</text>
+            <rect x="204" y="13" width="52" height="38" rx="4" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.32)" stroke-width="1"/>
+            <text x="230" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Eval</text>
+            <text x="230" y="41" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Agent</text>
+            <line x1="45" y1="32" x2="60" y2="32" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="114" y1="32" x2="131" y2="32" stroke="rgba(59,130,246,.45)" stroke-width="1" marker-end="url(#a2)"/>
+            <line x1="185" y1="32" x2="202" y2="32" stroke="rgba(6,182,212,.45)" stroke-width="1" marker-end="url(#a3)"/>
+            <text x="148" y="59" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle">local LLM via Ollama · zero data egress</text>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="ph2">
+            <div class="pico" aria-hidden="true">🤖</div>
+            <div class="plinks">
+              <a href="https://github.com/thulasiramk-2310/TRX-AI" class="plink" target="_blank" rel="noopener" aria-label="TRX-AI on GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="pn">TRX-AI</div>
+            <p class="pd">Multi-agent code intelligence platform for automated code review and patch generation using local LLMs — privacy-preserving, zero data egress.</p>
+          </div>
+          <div class="pfs">
+            <div class="pf">Review → Patch → Eval multi-agent pipeline</div>
+            <div class="pf">Semantic code evaluation with modular agent architecture</div>
+            <div class="pf">Local-first via Ollama — runs fully offline</div>
+            <div class="pf">Async FastAPI backend with pluggable LLM backends</div>
+          </div>
+          <div class="bds">
+            <span class="b ba">Python</span><span class="b bc">FastAPI</span><span class="b bpu">Ollama</span><span class="b">LLMs</span><span class="b">Multi-agent</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SysDash -->
+      <article class="pc" aria-label="SysDash project">
+        <div class="pdiag" aria-hidden="true">
+          <svg viewBox="0 0 296 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="9" width="42" height="18" rx="3" fill="rgba(17,17,21,1)" stroke="#1c1c25" stroke-width="1"/>
+            <text x="24" y="18" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#42425a" text-anchor="middle" dominant-baseline="middle">CPU</text>
+            <rect x="3" y="37" width="42" height="18" rx="3" fill="rgba(17,17,21,1)" stroke="#1c1c25" stroke-width="1"/>
+            <text x="24" y="46" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Memory</text>
+            <rect x="62" y="13" width="64" height="38" rx="4" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.32)" stroke-width="1"/>
+            <text x="94" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Go Backend</text>
+            <text x="94" y="41" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle" dominant-baseline="middle">goroutine pool</text>
+            <rect x="146" y="21" width="48" height="22" rx="4" fill="rgba(6,182,212,.06)" stroke="rgba(6,182,212,.3)" stroke-width="1"/>
+            <text x="170" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#68687e" text-anchor="middle" dominant-baseline="middle">WebSocket</text>
+            <rect x="214" y="21" width="78" height="22" rx="4" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.3)" stroke-width="1"/>
+            <text x="253" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Browser Dashboard</text>
+            <line x1="45" y1="18" x2="60" y2="26" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="45" y1="46" x2="60" y2="38" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="126" y1="32" x2="144" y2="32" stroke="rgba(59,130,246,.45)" stroke-width="1" marker-end="url(#a2)"/>
+            <line x1="194" y1="32" x2="212" y2="32" stroke="rgba(6,182,212,.45)" stroke-width="1" marker-end="url(#a3)"/>
+            <text x="148" y="59" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle">real-time · concurrent · containerised</text>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="ph2">
+            <div class="pico" aria-hidden="true">📡</div>
+            <div class="plinks">
+              <a href="https://github.com/thulasiramk-2310/cli_metrics" class="plink" target="_blank" rel="noopener" aria-label="SysDash on GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="pn">SysDash</div>
+            <p class="pd">Real-time system monitoring platform with a concurrent Go backend streaming live metrics to a browser dashboard over WebSockets.</p>
+          </div>
+          <div class="pfs">
+            <div class="pf">Concurrent Go backend — goroutine fan-in from CPU/Mem collectors</div>
+            <div class="pf">Push-based real-time delivery via WebSocket connections</div>
+            <div class="pf">Clean layered design: collector → transport → UI</div>
+            <div class="pf">Fully containerised with Docker for reproducible deploys</div>
+          </div>
+          <div class="bds">
+            <span class="b bc">Go</span><span class="b ba">WebSockets</span><span class="b">Docker</span><span class="b">Python</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Machine-Guard-AI -->
+      <article class="pc" aria-label="Machine-Guard-AI project">
+        <div class="pdiag" aria-hidden="true">
+          <svg viewBox="0 0 296 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="21" width="46" height="22" rx="4" fill="rgba(139,92,246,.06)" stroke="rgba(139,92,246,.3)" stroke-width="1"/>
+            <text x="26" y="30" font-family="JetBrains Mono,monospace" font-size="7" fill="#68687e" text-anchor="middle" dominant-baseline="middle">IoT</text>
+            <text x="26" y="40" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Device</text>
+            <rect x="67" y="21" width="42" height="22" rx="4" fill="rgba(17,17,21,1)" stroke="#1c1c25" stroke-width="1"/>
+            <text x="88" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#42425a" text-anchor="middle" dominant-baseline="middle">MQTT</text>
+            <rect x="127" y="13" width="46" height="38" rx="4" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>
+            <text x="150" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Flask</text>
+            <text x="150" y="41" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle" dominant-baseline="middle">ML detect</text>
+            <rect x="191" y="21" width="52" height="22" rx="4" fill="rgba(245,158,11,.06)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+            <text x="217" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Firebase</text>
+            <rect x="261" y="21" width="32" height="22" rx="4" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.3)" stroke-width="1"/>
+            <text x="277" y="32" font-family="JetBrains Mono,monospace" font-size="6.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Alert</text>
+            <line x1="49" y1="32" x2="65" y2="32" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="109" y1="32" x2="125" y2="32" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="173" y1="32" x2="189" y2="32" stroke="rgba(59,130,246,.45)" stroke-width="1" marker-end="url(#a2)"/>
+            <line x1="243" y1="32" x2="259" y2="32" stroke="rgba(6,182,212,.45)" stroke-width="1" marker-end="url(#a3)"/>
+            <text x="148" y="59" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle">event-driven · anomaly detection · real-time</text>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="ph2">
+            <div class="pico" aria-hidden="true">🏭</div>
+            <div class="plinks">
+              <a href="https://github.com/VIM4L-M/Machine-Guard-AI" class="plink" target="_blank" rel="noopener" aria-label="Machine-Guard-AI on GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="pn">Machine-Guard-AI</div>
+            <p class="pd">Industrial IoT monitoring system with ML-based anomaly detection and real-time event streaming from edge devices to a secure backend.</p>
+          </div>
+          <div class="pfs">
+            <div class="pf">MQTT-based edge-to-cloud device integration</div>
+            <div class="pf">ML anomaly detection on live industrial sensor streams</div>
+            <div class="pf">Firebase RTDB for low-latency alert propagation</div>
+            <div class="pf">Event-driven, secure backend with Kotlin mobile client</div>
+          </div>
+          <div class="bds">
+            <span class="b bgn">Kotlin</span><span class="b ba">Flask</span><span class="b">MQTT</span><span class="b bc">Firebase</span><span class="b">IoT</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- UnicornScope AI -->
+      <article class="pc" aria-label="UnicornScope AI project">
+        <div class="pdiag" aria-hidden="true">
+          <svg viewBox="0 0 296 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="21" width="42" height="22" rx="4" fill="rgba(17,17,21,1)" stroke="#1c1c25" stroke-width="1"/>
+            <text x="24" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#42425a" text-anchor="middle" dominant-baseline="middle">Query</text>
+            <rect x="62" y="13" width="70" height="38" rx="4" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>
+            <text x="97" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Elasticsearch</text>
+            <text x="97" y="41" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle" dominant-baseline="middle">semantic search</text>
+            <rect x="152" y="13" width="54" height="38" rx="4" fill="rgba(139,92,246,.06)" stroke="rgba(139,92,246,.3)" stroke-width="1"/>
+            <text x="179" y="29" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#68687e" text-anchor="middle" dominant-baseline="middle">LLM</text>
+            <text x="179" y="41" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle" dominant-baseline="middle">analysis</text>
+            <rect x="224" y="21" width="68" height="22" rx="4" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.3)" stroke-width="1"/>
+            <text x="258" y="32" font-family="JetBrains Mono,monospace" font-size="7" fill="#68687e" text-anchor="middle" dominant-baseline="middle">Insights</text>
+            <line x1="45" y1="32" x2="60" y2="32" stroke="#42425a" stroke-width="1" marker-end="url(#a1)"/>
+            <line x1="132" y1="32" x2="150" y2="32" stroke="rgba(59,130,246,.45)" stroke-width="1" marker-end="url(#a2)"/>
+            <line x1="206" y1="32" x2="222" y2="32" stroke="rgba(139,92,246,.45)" stroke-width="1" marker-end="url(#a3)"/>
+            <text x="148" y="59" font-family="JetBrains Mono,monospace" font-size="6" fill="#42425a" text-anchor="middle">semantic retrieval · LLM analysis · async FastAPI</text>
+          </svg>
+        </div>
+        <div class="pbody">
+          <div class="ph2">
+            <div class="pico" aria-hidden="true">🦄</div>
+            <div class="plinks">
+              <a href="https://github.com/thulasiramk-2310/AUSIP" class="plink" target="_blank" rel="noopener" aria-label="UnicornScope AI on GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="pn">UnicornScope AI</div>
+            <p class="pd">AI-powered startup intelligence platform combining Elasticsearch semantic search with LLM analysis for investor-grade startup insights.</p>
+          </div>
+          <div class="pfs">
+            <div class="pf">Elasticsearch-powered semantic retrieval at scale</div>
+            <div class="pf">LLM-driven startup scoring, clustering, and summarisation</div>
+            <div class="pf">Async FastAPI backend — search-as-you-type React frontend</div>
+            <div class="pf">Modular architecture, horizontally scalable by design</div>
+          </div>
+          <div class="bds">
+            <span class="b ba">React</span><span class="b bc">FastAPI</span><span class="b bpu">Elasticsearch</span><span class="b">LLMs</span><span class="b">Python</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="si">
+    <div class="stag">// 03 — technologies</div>
+    <h2 class="st">Skills &amp; Stack</h2>
+    <div class="sline"></div>
+    <div class="skgg">
+      <div class="skc"><div class="skt"><span class="skd" style="background:var(--accent)"></span>Languages</div><div class="skps"><span class="skp">Python</span><span class="skp">Go</span><span class="skp">C / C++</span><span class="skp">JavaScript</span><span class="skp">TypeScript</span><span class="skp">Kotlin</span><span class="skp">SQL</span></div></div>
+      <div class="skc"><div class="skt"><span class="skd" style="background:var(--accent2)"></span>Frontend</div><div class="skps"><span class="skp">React</span><span class="skp">Next.js</span><span class="skp">TailwindCSS</span><span class="skp">TypeScript</span><span class="skp">WebSockets</span></div></div>
+      <div class="skc"><div class="skt"><span class="skd" style="background:var(--green)"></span>Backend</div><div class="skps"><span class="skp">FastAPI</span><span class="skp">Flask</span><span class="skp">Go HTTP</span><span class="skp">REST APIs</span><span class="skp">MQTT</span><span class="skp">WebSockets</span></div></div>
+      <div class="skc"><div class="skt"><span class="skd" style="background:var(--amber)"></span>Cloud &amp; DevOps</div><div class="skps"><span class="skp">AWS</span><span class="skp">Docker</span><span class="skp">Firebase</span><span class="skp">Linux</span><span class="skp">Git</span><span class="skp">CI/CD</span></div></div>
+      <div class="skc"><div class="skt"><span class="skd" style="background:var(--accent3)"></span>AI &amp; ML</div><div class="skps"><span class="skp">PyTorch</span><span class="skp">Ollama / LLMs</span><span class="skp">OpenCV</span><span class="skp">FinBERT</span><span class="skp">ViT</span><span class="skp">Scikit-learn</span></div></div>
+      <div class="skc"><div class="skt"><span class="skd" style="background:#ec4899"></span>Databases &amp; Search</div><div class="skps"><span class="skp">PostgreSQL</span><span class="skp">Elasticsearch</span><span class="skp">Firebase RTDB</span><span class="skp">SQLite</span><span class="skp">Supabase</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="si">
+    <div class="stag">// 04 — experience</div>
+    <h2 class="st">Work &amp; Internships</h2>
+    <div class="sline"></div>
+    <div class="el">
+      <div class="ec">
+        <div class="edot" style="background:var(--accent);box-shadow:0 0 12px rgba(59,130,246,.32)"></div>
+        <div>
+          <div class="er">AI/ML Virtual Intern</div>
+          <div class="eco">AICTE &amp; EduSkills Foundation</div>
+          <div class="edt">2024</div>
+          <div class="eps">
+            <div class="ep">Designed and implemented modular ML pipelines for real-world supervised learning tasks</div>
+            <div class="ep">Worked end-to-end with structured datasets — preprocessing, feature engineering, cross-validation</div>
+            <div class="ep">Built reusable workflow components following clean engineering and separation-of-concerns principles</div>
+            <div class="ep">Benchmarked classification and regression models with statistical evaluation</div>
+          </div>
+        </div>
+      </div>
+      <div class="ec">
+        <div class="edot" style="background:var(--accent2);box-shadow:0 0 12px rgba(6,182,212,.32)"></div>
+        <div>
+          <div class="er">Cloud Computing Intern</div>
+          <div class="eco">Chennai Institute of Technology</div>
+          <div class="edt">2024</div>
+          <div class="eps">
+            <div class="ep">Built a system monitoring dashboard tracking cloud infrastructure KPIs in real time</div>
+            <div class="ep">Studied cloud observability patterns — metric aggregation, alerting pipelines, threshold detection</div>
+            <div class="ep">Delivered a working prototype integrating a backend collector with a live frontend dashboard</div>
+            <div class="ep">Explored containerised service deployment and environment configuration strategies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="si">
+    <div class="stag">// 05 — achievements</div>
+    <h2 class="st">Recognition</h2>
+    <div class="sline"></div>
+    <div class="achg">
+      <div class="ach"><div class="atag tos">Open Source</div><div class="aic">🔐</div><div class="at">AWS s2n-tls Contributor</div><div class="as">Contributed to Amazon's s2n-tls — the open-source TLS/SSL implementation powering AWS services. Code reviewed and merged upstream.</div></div>
+      <div class="ach"><div class="atag twin">🥇 Winner</div><div class="aic">⚡</div><div class="at">TI Forge Hackathon</div><div class="as">First place at TI Forge — a hardware and software hackathon. Built an embedded system solution under a 24-hour constraint.</div></div>
+      <div class="ach"><div class="atag twin">🥇 Winner</div><div class="aic">🌱</div><div class="at">AI for Sustainability Hackathon</div><div class="as">Won by designing a data-driven solution for environmental impact monitoring and analysis using AI.</div></div>
+      <div class="ach"><div class="atag ttop">Top 5</div><div class="aic">🎓</div><div class="at">IISc Bangalore Coding Competition</div><div class="as">Ranked 4th at IISc Bangalore's competitive programming contest — one of India's most prestigious research institutions.</div></div>
+      <div class="ach"><div class="atag tfin">Finalist</div><div class="aic">🚀</div><div class="at">Google TechSprint Finalist</div><div class="as">Selected as a finalist in Google's TechSprint program, competing against engineering teams from colleges across India.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="si">
+    <div class="stag">// 06 — contact</div>
+    <h2 class="st">Get In Touch</h2>
+    <div class="sline"></div>
+    <div class="cg">
+      <div class="ci">
+        <h3>Let's build something great.</h3>
+        <p>I'm actively seeking software engineering, backend, cloud, and AI engineering internships. If you're building something interesting, or recruiting for a role I'd be well-suited for — I'd genuinely love to hear from you.</p>
+        <div class="cls">
+          <a href="mailto:thulasiramk.aiml2024@citchennai.net" class="cl">
+            <div class="cli"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            thulasiramk.aiml2024@citchennai.net
+          </a>
+          <a href="https://github.com/thulasiramk-2310" class="cl" target="_blank" rel="noopener">
+            <div class="cli"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></div>
+            github.com/thulasiramk-2310
+          </a>
+          <a href="https://linkedin.com/in/thulasiram-k" class="cl" target="_blank" rel="noopener">
+            <div class="cli"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+            linkedin.com/in/thulasiram-k
+          </a>
+        </div>
+      </div>
+
+      <!--
+        Contact form uses Formspree (https://formspree.io).
+        Steps to activate:
+          1. Sign up at formspree.io (free tier: 50 submissions/month)
+          2. Create a new form → copy your form ID
+          3. Replace 'YOUR_FORM_ID' below with that ID
+        Until you do, the form falls back to a mailto: link.
+      -->
+      <form class="cf" id="cform" novalidate>
+        <div class="ff"><label for="fn">Name</label><input id="fn" name="name" type="text" placeholder="Your name" required autocomplete="name"/></div>
+        <div class="ff"><label for="fe">Email</label><input id="fe" name="email" type="email" placeholder="you@company.com" required autocomplete="email"/></div>
+        <div class="ff"><label for="fm">Message</label><textarea id="fm" name="message" rows="4" placeholder="Tell me about the role or project…" required></textarea></div>
+        <div id="ffb" class="fmsg" role="alert" aria-live="polite"></div>
+        <button type="submit" class="fsub" id="fbtn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Thulasiram K &nbsp;·&nbsp; Chennai, India &nbsp;·&nbsp; B.E. CSE (AI &amp; ML), CIT &nbsp;·&nbsp; <a href="mailto:thulasiramk.aiml2024@citchennai.net" style="color:var(--muted2);text-decoration:underline;text-underline-offset:3px">thulasiramk.aiml2024@citchennai.net</a></p>
+  <p style="margin-top:.3rem;font-size:.7rem">Built from scratch · No templates</p>
+</footer>
+
+<!-- CMD PALETTE -->
+<div class="cmd-ov" id="cmd" style="display:none" role="dialog" aria-modal="true" aria-label="Command palette" onclick="onOv(event)">
+  <div class="cmd-box" onclick="event.stopPropagation()">
+    <div class="cmd-top">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="cmi" placeholder="Search sections, projects, links…" oninput="fCmd(this.value)" onkeydown="kCmd(event)" aria-label="Command palette search"/>
+    </div>
+    <div class="cmd-body" id="cmb" role="listbox"></div>
+    <div class="cmd-ft" aria-hidden="true"><span>↑↓ navigate</span><span>↵ open</span><span>esc close</span></div>
+  </div>
+</div>
+
+<script>
+/* PROGRESS BAR */
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  prog.style.width=Math.min(p,100)+'%';
+},{passive:true});
+
+/* MOBILE NAV */
+let mobOpen=false;
+function toggleMob(){
+  mobOpen=!mobOpen;
+  document.getElementById('mobmenu').classList.toggle('open',mobOpen);
+  const h=document.getElementById('ham');
+  const sp=h.querySelectorAll('span');
+  h.setAttribute('aria-expanded',mobOpen);
+  if(mobOpen){sp[0].style.transform='translateY(6.5px) rotate(45deg)';sp[1].style.opacity='0';sp[2].style.transform='translateY(-6.5px) rotate(-45deg)';}
+  else{sp[0].style.transform='';sp[1].style.opacity='';sp[2].style.transform='';}
+}
+function closeMob(){if(mobOpen)toggleMob();}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('header'))closeMob();
+});
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';ro.unobserve(e.target);}
+  });
+},{threshold:.06,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.pc,.skc,.ec,.ach,.acd,.exch').forEach((el,i)=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(18px)';
+  el.style.transition=`opacity .46s ease ${(i%4)*.065}s, transform .46s ease ${(i%4)*.065}s`;
+  ro.observe(el);
+});
+
+/* CONTACT FORM */
+const FSPREE='YOUR_FORM_ID'; // replace with your Formspree form ID
+const SEND_SVG='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+document.getElementById('cform').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById('fbtn');
+  const fb=document.getElementById('ffb');
+  const name=form.name.value.trim();
+  const email=form.email.value.trim();
+  const message=form.message.value.trim();
+  if(!name||!email||!message){fb.textContent='Please fill in all fields.';fb.className='fmsg er';return;}
+  btn.disabled=true;
+  btn.innerHTML='<svg style="animation:spin .7s linear infinite" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…';
+  fb.className='fmsg';
+  if(FSPREE==='YOUR_FORM_ID'){
+    const s=encodeURIComponent(`Portfolio message from ${name}`);
+    const b=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href=`mailto:thulasiramk.aiml2024@citchennai.net?subject=${s}&body=${b}`;
+    btn.disabled=false;btn.innerHTML=SEND_SVG+' Send Message';return;
+  }
+  try{
+    const res=await fetch(`https://formspree.io/f/${FSPREE}`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({name,email,message}),
+    });
+    if(res.ok){fb.textContent="✓ Sent! I'll get back to you soon.";fb.className='fmsg ok';form.reset();}
+    else throw new Error();
+  }catch{
+    fb.textContent='Something went wrong. Email me directly at thulasiramk.aiml2024@citchennai.net';
+    fb.className='fmsg er';
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML=SEND_SVG+' Send Message';
+  }
+});
+
+/* CMD PALETTE */
+const ITEMS=[
+  {g:'Navigate',l:'Top / Hero',icon:'🏠',s:'hero'},
+  {g:'Navigate',l:'About Me',icon:'👤',s:'about'},
+  {g:'Navigate',l:'Currently Exploring',icon:'🔭',s:'exploring'},
+  {g:'Navigate',l:'Projects',icon:'📁',s:'projects'},
+  {g:'Navigate',l:'Skills & Stack',icon:'⚡',s:'skills'},
+  {g:'Navigate',l:'Experience',icon:'💼',s:'experience'},
+  {g:'Navigate',l:'Achievements',icon:'🏆',s:'achievements'},
+  {g:'Navigate',l:'Contact',icon:'✉️',s:'contact'},
+  {g:'Projects',l:'TRX-AI — multi-agent code intelligence',icon:'🤖',s:'projects'},
+  {g:'Projects',l:'SysDash — real-time system monitor',icon:'📡',s:'projects'},
+  {g:'Projects',l:'Machine-Guard-AI — IoT monitoring',icon:'🏭',s:'projects'},
+  {g:'Projects',l:'UnicornScope AI — startup intelligence',icon:'🦄',s:'projects'},
+  {g:'Links',l:'GitHub — thulasiramk-2310',icon:'🔗',url:'https://github.com/thulasiramk-2310'},
+  {g:'Links',l:'LinkedIn — thulasiram-k',icon:'🔗',url:'https://linkedin.com/in/thulasiram-k'},
+  {g:'Links',l:'Email',icon:'📧',url:'mailto:thulasiramk.aiml2024@citchennai.net'},
+];
+let fi=[...ITEMS],ai=0;
+function openCmd(){document.getElementById('cmd').style.display='flex';document.getElementById('cmi').value='';fi=[...ITEMS];ai=0;renderCmd();requestAnimationFrame(()=>document.getElementById('cmi').focus());}
+function closeCmd(){document.getElementById('cmd').style.display='none';}
+function onOv(e){if(e.target===document.getElementById('cmd'))closeCmd();}
+function fCmd(v){const q=v.toLowerCase();fi=ITEMS.filter(i=>i.l.toLowerCase().includes(q)||i.g.toLowerCase().includes(q));ai=0;renderCmd();}
+function renderCmd(){
+  const grps=[...new Set(fi.map(i=>i.g))];
+  let h='';
+  grps.forEach(g=>{
+    h+=`<div class="cmd-sec">${g}</div>`;
+    fi.filter(i=>i.g===g).forEach(item=>{
+      const ri=fi.indexOf(item);
+      h+=`<div class="cmd-it${ri===ai?' on':''}" role="option" aria-selected="${ri===ai}" onclick="execCmd(${ri})">
+        <div class="cmd-ico" aria-hidden="true">${item.icon}</div>
+        <span class="cmd-lbl">${item.l}</span>
+      </div>`;
+    });
+  });
+  if(!fi.length)h='<div style="padding:2.5rem;text-align:center;color:var(--muted2);font-size:.83rem">No results</div>';
+  document.getElementById('cmb').innerHTML=h;
+}
+function execCmd(i){
+  const it=fi[i];
+  if(it.url)window.open(it.url,it.url.startsWith('mailto')?'_self':'_blank','noopener');
+  else document.getElementById(it.s)?.scrollIntoView({behavior:'smooth'});
+  closeCmd();
+}
+function kCmd(e){
+  if(e.key==='ArrowDown'){ai=Math.min(ai+1,fi.length-1);renderCmd();e.preventDefault();}
+  if(e.key==='ArrowUp'){ai=Math.max(ai-1,0);renderCmd();e.preventDefault();}
+  if(e.key==='Enter'&&fi[ai])execCmd(ai);
+  if(e.key==='Escape')closeCmd();
+}
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openCmd();}
+  if(e.key==='Escape'&&document.getElementById('cmd').style.display!=='none')closeCmd();
+});
+</script>
+</body>
+</html>
